@@ -55,14 +55,16 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
+
+                              
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    {{-- <a class="dropdown-item" href="{{ route('users.edit-profile') }}">
+                                    <a class="dropdown-item" href="{{ route('users.edit-profile') }}">
                                         My Profile
-                                    </a> --}}
+                                    </a>
                                     
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -99,13 +101,19 @@
                   <div class="row">
                     <div class="col-md-4">
                       <ul class="list-group">
-                        {{-- @if(auth()->user()->isAdmin()) --}}
+
+
+
+                        @if(auth()->user()->isAdmin())
                           <li class="list-group-item">
-                            {{-- <a href="{{ route('users.index') }}"> --}}
+                            <a href="{{ route('users.index') }}">
                               Users
-                            {{-- </a> --}}
+                            </a>
                           </li>
-                        {{-- @endif --}}
+                        @endif
+
+
+
                         <li class="list-group-item">
                           <a href="{{ route('tags.index') }}">Tags</a>
                         </li>
