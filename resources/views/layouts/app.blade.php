@@ -9,20 +9,24 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+      .btn-info {
+        color: #fff;
+      }
+    </style>
+
+    @yield('css')
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -56,11 +60,17 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    {{-- <a class="dropdown-item" href="{{ route('users.edit-profile') }}">
+                                        My Profile
+                                    </a> --}}
+                                    
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+
+                                    
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -74,12 +84,9 @@
         </nav>
 
         <main class="py-4">
-        
-        @auth
-            <div class="container">
-
-
-                @if(session()->has('success'))
+            @auth
+              <div class="container">
+                  @if(session()->has('success'))
                     <div class="alert alert-success">
                       {{ session()->get('success') }}
                     </div>
@@ -89,46 +96,46 @@
                       {{ session()->get('error') }}
                     </div>
                   @endif
-
-                  
-                <div class="row">
+                  <div class="row">
                     <div class="col-md-4">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <a href="{{route('posts.index')}}">Posts</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{route('categories.index')}}">Categories</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{route('tags.index')}}">Tags</a>
-                            </li>
-                        </ul>
+                      <ul class="list-group">
+                        {{-- @if(auth()->user()->isAdmin()) --}}
+                          <li class="list-group-item">
+                            {{-- <a href="{{ route('users.index') }}"> --}}
+                              Users
+                            {{-- </a> --}}
+                          </li>
+                        {{-- @endif --}}
+                        <li class="list-group-item">
+                          <a href="{{ route('tags.index') }}">Tags</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="{{ route('posts.index') }}">Posts</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="{{ route('categories.index') }}">Categories</a>
+                        </li>
+                      </ul>
 
-                        <ul class="list-group mt-5">
-                            <li class="list-group-item">
-                                <a href="{{route('trashed-posts.index')}}">Trashed Posts</a>
-                            </li>
-                        </ul>
+                      <ul class="list-group mt-5">
+                        <li class="list-group-item">
+                          <a href="{{ route('trashed-posts.index') }}">Trashed Posts</a>
+                        </li>
+                      </ul>
                     </div>
                     <div class="col-md-8">
-                            
                         @yield('content')
-                            
                     </div>
-                </div>
-            </div>
+                  </div>
+              </div>
             @else
-                            @yield('content')
+              @yield('content')
             @endauth
         </main>
     </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-  @yield('scripts')
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

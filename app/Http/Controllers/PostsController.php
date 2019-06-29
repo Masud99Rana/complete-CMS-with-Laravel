@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\Posts\CreatePostsRequest;
 use App\Post;
-// use App\Tag;
+use App\Tag;
 use App\Category;
 use App\Http\Requests\Posts\UpdatePostRequest;
 
@@ -35,10 +35,10 @@ class PostsController extends Controller
      */
     public function create()
     {
-        // return view('posts.create')->with('categories', Category::all())->with('tags', Tag::all());
+        return view('posts.create')->with('categories', Category::all())->with('tags', Tag::all());
         
 
-        return view('posts.create')->with('categories', Category::all());
+        // return view('posts.create')->with('categories', Category::all());
     }
 
     // /**
@@ -92,8 +92,8 @@ class PostsController extends Controller
     //  */
     public function edit(Post $post)
     {
-        // return view('posts.create')->with('post', $post)->with('categories', Category::all())->with('tags', Tag::all());
-        return view('posts.create')->with('post', $post)->with('categories', Category::all());
+        return view('posts.create')->with('post', $post)->with('categories', Category::all())->with('tags', Tag::all());
+        // return view('posts.create')->with('post', $post)->with('categories', Category::all());
     }
 
     // *
