@@ -6,7 +6,6 @@ use Closure;
 
 
 use Auth;
-
 class VerifyIsAdmin
 {
     /**
